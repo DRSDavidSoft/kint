@@ -47,6 +47,8 @@ class Kint_Decorators_Plain
 		"&#9474;",
 		"&#9492;", "&#9472;", "&#9496;",
 	);
+	
+	private static $_consoleRow = 79;
 
 	public static function decorate( kintVariableData $kintVar, $level = 0 )
 	{
@@ -228,16 +230,16 @@ class Kint_Decorators_Plain
 		$lengthDifference = strlen( $escaped ) - strlen( $text );
 		return
 			self::_colorize(
-				self::_char( '┌' ) . self::_char( '─', 78 ) . self::_char( '┐' ) . PHP_EOL
+				self::_char( '┌' ) . self::_char( '─', self::$_consoleRow - 2 ) . self::_char( '┐' ) . PHP_EOL
 				. self::_char( '│' ),
 				'title',
 				false
 			)
 
-			. self::_colorize( str_pad( $escaped, 78 + $lengthDifference, ' ', STR_PAD_BOTH ), 'title', false )
+			. self::_colorize( str_pad( $escaped, self::$_consoleRow - 2 + $lengthDifference, ' ', STR_PAD_BOTH ), 'title', false )
 
 			. self::_colorize( self::_char( '│' ) . PHP_EOL
-				. self::_char( '└' ) . self::_char( '─', 78 ) . self::_char( '┘' ),
+				. self::_char( '└' ) . self::_char( '─', self::$_consoleRow - 2) . self::_char( '┘' ),
 				'title'
 			);
 	}
@@ -252,7 +254,7 @@ class Kint_Decorators_Plain
 
 	public static function wrapEnd( $callee, $miniTrace, $prevCaller )
 	{
-		$lastLine = self::_colorize( self::_char( "═", 80 ), 'title' );
+		$lastLine = self::_colorize( self::_char( "═", self::$_consoleRow ), 'title' );
 		$lastChar = Kint::enabled() === Kint::MODE_PLAIN ? '</pre>' : '';
 
 
