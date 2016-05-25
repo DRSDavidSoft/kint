@@ -215,6 +215,7 @@ class Kint_Decorators_Plain
 				break;
 			case Kint::MODE_WHITESPACE:
 			default:
+				$char = ' ';
 				break;
 		}
 
