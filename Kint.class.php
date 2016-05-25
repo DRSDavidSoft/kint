@@ -806,7 +806,7 @@ if ( !function_exists( 's' ) ) {
 			$restoreMode = Kint::MODE_WHITESPACE;
 		} else {
 			$restoreMode = Kint::enabled( # remove cli colors in cli mode; remove rich interface in HTML mode
-				PHP_SAPI === 'cli' ? Kint::MODE_WHITESPACE : Kint::MODE_PLAIN
+				PHP_SAPI === 'cli' ? Kint::MODE_CLI : Kint::MODE_PLAIN
 			);
 		}
 
