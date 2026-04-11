@@ -799,7 +799,8 @@ class UtilsTest extends KintTestCase
 
     public function pathProvider()
     {
-        $root_parent = '/'.\explode('/', __DIR__)[1];
+        $kint_split = \explode('/', \str_replace('\\', '/', KINT_DIR));
+        $root_parent = $kint_split[0].'/'.$kint_split[1];
 
         $tests = [
             'standard file' => [

@@ -229,7 +229,11 @@ class MysqliPluginTest extends KintTestCase
         $p = new Parser();
         $base = new BaseContext('$v');
 
-        @$v = new MysqliTestClass(\getenv('MYSQLI_HOST'), \getenv('MYSQLI_USER'), \getenv('MYSQLI_PASS'));
+        try {
+            @$v = new MysqliTestClass(\getenv('MYSQLI_HOST'), \getenv('MYSQLI_USER'), \getenv('MYSQLI_PASS'));
+        } catch (\Throwable $e) {
+            $this->markTestSkipped('Mysqli connection error. Check connection information in phpunit.xml');
+        }
 
         if ($v->connect_errno) {
             $this->markTestSkipped('Mysqli connection error. Check connection information in phpunit.xml');
@@ -400,7 +404,11 @@ class MysqliPluginTest extends KintTestCase
 
     protected function getRealMysqliConnection()
     {
-        @$m = new Mysqli(\getenv('MYSQLI_HOST'), \getenv('MYSQLI_USER'), \getenv('MYSQLI_PASS'));
+        try {
+            @$m = new Mysqli(\getenv('MYSQLI_HOST'), \getenv('MYSQLI_USER'), \getenv('MYSQLI_PASS'));
+        } catch (\Throwable $e) {
+            $this->markTestSkipped('Mysqli connection error. Check connection information in phpunit.xml');
+        }
 
         if ($m->connect_errno) {
             $this->markTestSkipped('Mysqli connection error. Check connection information in phpunit.xml');

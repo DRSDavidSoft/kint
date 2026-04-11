@@ -25,7 +25,7 @@ declare(strict_types=1);
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-if (KINT_PHP81 && \extension_loaded('mysqli')) {
+if (\extension_loaded('mysqli') && KINT_PHP81) {
     \class_alias(Kint\Test\Fixtures\Mysqli81TestClass::class, Kint\Test\Fixtures\MysqliTestClass::class);
 }
 

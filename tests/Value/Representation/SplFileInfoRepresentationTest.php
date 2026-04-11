@@ -57,6 +57,10 @@ class SplFileInfoRepresentationTest extends KintTestCase
 
     protected function setUp(): void
     {
+        if (\PHP_OS_FAMILY === 'Windows') {
+            $this->markTestSkipped('SplFileInfoRepresentation tests require POSIX functions unavailable on Windows');
+        }
+
         parent::setUp();
 
         $this->umask = \umask(0);
@@ -90,7 +94,13 @@ class SplFileInfoRepresentationTest extends KintTestCase
 
     protected function tearDown(): void
     {
+        \ini_restore('open_basedir');
+
         parent::tearDown();
+
+        if (\PHP_OS_FAMILY === 'Windows') {
+            return;
+        }
 
         \umask($this->umask);
 
