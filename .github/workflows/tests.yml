@@ -1,5 +1,7 @@
 name: Tests
 on: [push, pull_request]
+permissions:
+  contents: read
 jobs:
   test-format:
     name: 'Code format check'
