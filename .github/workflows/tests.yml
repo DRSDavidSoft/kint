@@ -120,3 +120,28 @@ jobs:
         env:
           KINT_PHAR_TEST: 1
           MYSQLI_HOST: localhost:${{ job.services.mysql.ports['3306'] }}
+  test-windows:
+    name: 'Windows PHP ${{ matrix.php-versions }} tests'
+    needs:
+      - test-format
+      - test-build
+      - test-static
+      - test-basic
+    runs-on: windows-latest
+    continue-on-error: ${{ matrix.php-versions == '8.5' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions:
+          - 8.2
+          - 8.3
+          - 8.4
+          - 8.5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/kint-setup
+        name: Kint setup
+        with:
+          php-version: ${{ matrix.php-versions }}
+      - run: php ./vendor/bin/phpunit --no-coverage tests
+        shell: bash
