@@ -50,7 +50,11 @@ class FsPathPluginTest extends KintTestCase
     {
         parent::tearDown();
 
-        \unlink(__DIR__.'/testDirLink');
+        if (\DIRECTORY_SEPARATOR === '\\' && \is_dir(__DIR__.'/testDirLink')) {
+            \rmdir(__DIR__.'/testDirLink');
+        } else {
+            \unlink(__DIR__.'/testDirLink');
+        }
         \unlink(__DIR__.'/testFileLink');
     }
 

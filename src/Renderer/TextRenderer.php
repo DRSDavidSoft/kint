@@ -145,14 +145,14 @@ class TextRenderer extends AbstractRenderer
         $c = $v->getContext();
 
         if (0 === $c->getDepth()) {
-            $out .= $this->colorTitle($this->renderTitle($v)).PHP_EOL;
+            $out .= $this->colorTitle($this->renderTitle($v))."\n";
         }
 
         $out .= $header = $this->renderHeader($v);
         $out .= $this->renderChildren($v);
 
         if (\strlen($header)) {
-            $out .= PHP_EOL;
+            $out .= "\n";
         }
 
         if (!$this->render_spl_ids && $render_spl_ids_stash) {
@@ -164,13 +164,13 @@ class TextRenderer extends AbstractRenderer
 
     public function boxText(string $text, int $width): string
     {
-        $out = '┌'.\str_repeat('─', $width - 2).'┐'.PHP_EOL;
+        $out = '┌'.\str_repeat('─', $width - 2).'┐'."\n";
 
         if (\strlen($text)) {
             $text = Utils::truncateString($text, $width - 4);
             $text = \str_pad($text, $width - 4);
 
-            $out .= '│ '.$this->escape($text).' │'.PHP_EOL;
+            $out .= '│ '.$this->escape($text).' │'."\n";
         }
 
         $out .= '└'.\str_repeat('─', $width - 2).'┘';
@@ -260,7 +260,7 @@ class TextRenderer extends AbstractRenderer
             $output = '';
         }
 
-        $output .= PHP_EOL;
+        $output .= "\n";
         foreach ($children as $child) {
             $output .= $this->render($child);
         }
@@ -304,10 +304,10 @@ class TextRenderer extends AbstractRenderer
         }
 
         if ($output) {
-            $output .= PHP_EOL;
+            $output .= "\n";
         }
 
-        return $this->colorTitle($output.$this->calledFrom().PHP_EOL);
+        return $this->colorTitle($output.$this->calledFrom()."\n");
     }
 
     public function filterParserPlugins(array $plugins): array

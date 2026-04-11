@@ -40,6 +40,7 @@ use Kint\Parser\ToStringPlugin;
 use Kint\Parser\TracePlugin;
 use Kint\Parser\XmlPlugin;
 use Kint\Renderer\AbstractRenderer;
+use Kint\Renderer\CliRenderer;
 use Kint\Renderer\RichRenderer;
 use Kint\Renderer\TextRenderer;
 use Kint\Utils;
@@ -78,6 +79,7 @@ class KintTestCase extends TestCase
     protected $classstrings_blacklist;
     protected $classmethods_show_access_path;
     protected $classmethods_show_constructor_path;
+    protected $cli_force_utf8;
 
     protected function setUp(): void
     {
@@ -114,6 +116,8 @@ class KintTestCase extends TestCase
         $this->classstrings_blacklist = ClassStringsPlugin::$blacklist;
         $this->classmethods_show_access_path = ClassMethodsPlugin::$show_access_path;
         $this->classmethods_show_constructor_path = ClassMethodsPlugin::$show_constructor_path;
+        $this->cli_force_utf8 = CliRenderer::$force_utf8;
+        CliRenderer::$force_utf8 = true;
     }
 
     protected function tearDown(): void
@@ -153,6 +157,7 @@ class KintTestCase extends TestCase
         ClassStringsPlugin::$blacklist = $this->classstrings_blacklist;
         ClassMethodsPlugin::$show_access_path = $this->classmethods_show_access_path;
         ClassMethodsPlugin::$show_constructor_path = $this->classmethods_show_constructor_path;
+        CliRenderer::$force_utf8 = $this->cli_force_utf8;
     }
 
     public function assertLike(array $expected, string $actual, string $message = '')

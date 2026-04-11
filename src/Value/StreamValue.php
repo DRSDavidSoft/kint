@@ -65,7 +65,7 @@ class StreamValue extends ResourceValue
             return null;
         }
 
-        if ('/' === $this->uri[0] && \stream_is_local($this->uri)) {
+        if (\stream_is_local($this->uri)) {
             return Utils::shortenPath($this->uri);
         }
 

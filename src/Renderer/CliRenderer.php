@@ -155,7 +155,7 @@ class CliRenderer extends TextRenderer
 
     public function preRender(): string
     {
-        return PHP_EOL;
+        return "\n";
     }
 
     public function postRender(): string
