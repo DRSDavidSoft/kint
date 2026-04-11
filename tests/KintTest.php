@@ -250,7 +250,7 @@ class KintTest extends KintTestCase
             $k->setStatesFromStatics($statics);
         } catch (Warning $w) {
             if (KINT_PHP82) {
-                $this->assertStringStartsWith('Plugin '.AbstractPlugin::class."@anonymous\0/", $w->getMessage());
+                $this->assertStringStartsWith('Plugin '.AbstractPlugin::class."@anonymous\0", $w->getMessage());
             } elseif (KINT_PHP80) {
                 $this->assertStringStartsWith('Plugin '.AbstractPlugin::class.'@anonymous ', $w->getMessage());
             } else {
