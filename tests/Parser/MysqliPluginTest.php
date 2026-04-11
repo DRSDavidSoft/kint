@@ -40,6 +40,7 @@ use Kint\Value\Representation\StringRepresentation;
 use Kint\Value\StringValue;
 use Mysqli;
 use stdClass;
+use Throwable;
 
 /**
  * @coversNothing
@@ -231,7 +232,7 @@ class MysqliPluginTest extends KintTestCase
 
         try {
             @$v = new MysqliTestClass(\getenv('MYSQLI_HOST'), \getenv('MYSQLI_USER'), \getenv('MYSQLI_PASS'));
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->markTestSkipped('Mysqli connection error. Check connection information in phpunit.xml');
         }
 
@@ -406,7 +407,7 @@ class MysqliPluginTest extends KintTestCase
     {
         try {
             @$m = new Mysqli(\getenv('MYSQLI_HOST'), \getenv('MYSQLI_USER'), \getenv('MYSQLI_PASS'));
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->markTestSkipped('Mysqli connection error. Check connection information in phpunit.xml');
         }
 
